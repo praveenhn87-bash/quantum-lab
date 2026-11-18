@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QuantumLab OS: Interactive Quantum & Majorana Explorer</title>
+  <meta name="description" content="Visual quantum mechanics dashboard demonstrating superposition, entanglement, Grover's algorithm, and Microsoft's Majorana 1 & 2 topological qubit hardware.">
+  
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- Toast Notification Container -->
+  <div id="toast-container" class="toast-container"></div>
+
+  <!-- Global Application Shell -->
+  <div class="app-shell">
+    
+    <!-- Top Mission Control Header -->
+    <header class="top-header">
+      <div class="brand-section">
+        <div class="brand-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#090D16" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="3"></circle>
+            <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"></path>
+          </svg>
+        </div>
+        <div class="brand-title">
+          QuantumLab OS
+          <span class="brand-tag">v2.6 Topological</span>
+        </div>
+      </div>
+
+      <div class="header-controls">
+        <div class="badge-status">
+          <span class="status-dot"></span>
+          <span>OPTICS LAB ONLINE</span>
+        </div>
+
+        <button id="btn-toggle-audio" class="btn-header" title="Toggle Synthesized Sound Effects">
+          🔊 SFX Active
+        </button>
+
+        <button id="btn-toggle-voice" class="btn-header active" title="Toggle Spoken Audio Descriptions">
+          🎙️ Voice Narration: ON
+        </button>
+
+        <button id="btn-toggle-ambient" class="btn-header" title="Toggle Ambient Optics Cleanroom Drone">
+          🎧 Lab Ambient: OFF
+        </button>
+
+        <button id="btn-toggle-veritasium" class="btn-header" title="Toggle Interactive Guided Tour">
+          🎮 Interactive Mode
+        </button>
+      </div>
+    </header>
+
+    <!-- 3-Pane Mission Control Grid -->
+    <div class="main-grid">
+
+      <!-- ====================================================================
+           LEFT SIDEBAR (20%): Story Chapters & Navigation
+           ==================================================================== -->
+      <aside class="left-sidebar">
+        
+        <!-- Interactive Story Narrator Box (Guided Explainer) -->
+        <div class="narrator-card">
+          <div class="narrator-header">
+            <div class="narrator-channel">
+              <span class="narrator-live-tag">LIVE</span>
+              <span id="narrator-speaker">Interactive Guide</span>
+            </div>
+            <span id="narrator-story-title" style="font-size: 0.7rem; color: var(--accent-cyan); font-weight: 600;">Module 01</span>
+          </div>
+
+          <div class="narrator-caption-box">
+            <div id="narrator-subtitles" class="narrator-subtitles">
+              "Loading documentary audio commentary..."
+            </div>
+          </div>
+
+          <div class="narrator-timeline">
+            <div id="narrator-progress" class="narrator-progress"></div>
+          </div>
+
+          <div class="narrator-actions">
+            <button id="btn-narrator-play" class="btn-narrator-play" title="Play or Pause Guided Documentary Tour">
+              <span class="play-icon">▶</span>
+              <span class="play-label">Play Guided Explainer</span>
+            </button>
+            
+            <div class="narrator-sub-controls">
+              <button id="btn-narrator-prev" class="btn-narrator-step" title="Previous Story Beat">
+                ⏮ Prev
+              </button>
+              <span id="narrator-step-indicator" class="narrator-step-pill">
+                Step <span id="narrator-step-num">1</span> / <span id="narrator-step-total">5</span>
+              </span>
+              <button id="btn-narrator-next" class="btn-narrator-step" title="Next Story Beat">
+                Next ⏭
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Module Navigation List -->
+        <div class="sidebar-section-title">
+          <span>Simulation Modules</span>
+          <span style="font-size: 0.65rem; color: var(--accent-cyan);">4 Levels</span>
+        </div>
+
+        <nav class="module-nav-list">
+          <!-- Module 1 -->
+          <div class="module-nav-item active" data-module="1">
+            <div class="module-item-header">
+              <span class="module-number">MODULE 01</span>
+              <span id="module-vault-badge" class="module-badge">IN PROGRESS</span>
+            </div>
+            <div class="module-title">Superposition & Bloch Sphere</div>
+            <div class="module-subtitle">The Quantum Vault & Phase Waves</div>
+          </div>
+
+          <!-- Module 2 -->
+          <div class="module-nav-item" data-module="2">
+            <div class="module-item-header">
+              <span class="module-number">MODULE 02</span>
+              <span id="module-bell-badge" class="module-badge">READY</span>
+            </div>
+            <div class="module-title">Entanglement & Tunneling</div>
+            <div class="module-subtitle">Silicon Barrier & Bell Plasma Tether</div>
+          </div>
+
+          <!-- Module 3 -->
+          <div class="module-nav-item" data-module="3">
+            <div class="module-item-header">
+              <span class="module-number">MODULE 03</span>
+              <span id="module-oracle-badge" class="module-badge">READY</span>
+            </div>
+            <div class="module-title">Quantum Interference & Grover</div>
+            <div class="module-subtitle">Wave Equalizer & Inversion About Mean</div>
+          </div>
+
+          <!-- Module 4 -->
+          <div class="module-nav-item" data-module="4">
+            <div class="module-item-header">
+              <span class="module-number">MODULE 04</span>
+              <span id="module-topological-badge" class="module-badge">BREAKTHROUGH</span>
+            </div>
+            <div class="module-title">Microsoft Majorana 1 vs 2</div>
+            <div class="module-subtitle">Topological Shield & Lead Upgrade</div>
+          </div>
+        </nav>
+
+        <!-- Gamification Achievements Card -->
+        <div class="gamification-card">
+          <div class="gamification-title">
+            <span>🏆</span>
+            <span>Lab Achievements</span>
+          </div>
+          <div style="font-size: 0.68rem; color: var(--text-dim); line-height: 1.3;">
+            Solve challenges across all 4 levels to achieve Master Qubit Architect status.
+          </div>
+          <div class="achievements-grid">
+            <div id="badge-vault" class="badge-slot" title="Module 1: Crack the Quantum Laser Lock">🔐</div>
+            <div id="badge-bell" class="badge-slot" title="Module 2: Entangle & Measure Bell Pair">⚡</div>
+            <div id="badge-oracle" class="badge-slot" title="Module 3: Maximize Grover Target to 96%">🎯</div>
+            <div id="badge-topological" class="badge-slot" title="Module 4: Upgrade to Heavy Lead Shield">🛡️</div>
+          </div>
+        </div>
+
+      </aside>
+
+
+      <!-- ====================================================================
+           CENTER VIEWPORT (50%): Dynamic Canvas & Gamified Sandbox
+           ==================================================================== -->
+      <main class="center-viewport">
+
+        <!-- ================================================================
+             MODULE 1: SUPERPOSITION & BLOCH SPHERE ("The Quantum Vault")
+             ================================================================ -->
+        <section id="module-view-1" style="display: flex; flex-direction: column; gap: 1rem;">
+          
+          <div class="module-header-banner">
+            <div class="banner-left">
+              <span class="banner-tag">Module 01 • Single Qubit Mechanics</span>
+              <h2 class="banner-title">Superposition, Phase & The Bloch Sphere</h2>
+              <p class="banner-desc">Explore continuous quantum state space on the 3D unit sphere and observe interference waves.</p>
+            </div>
+            <button class="btn-banner-tour" onclick="window.NarratorStory.togglePlayPause()" title="Play or Pause Guided Interactive Tour">
+              <span>▶</span> Play Interactive Tour
+            </button>
+          </div>
+
+          <!-- 3D Bloch Sphere Canvas Card -->
+          <div class="canvas-card">
+            <div class="canvas-toolbar">
+              <div class="canvas-title">
+                <span>Interactive Bloch Sphere</span>
+                <span class="canvas-badge">3D Projective Engine</span>
+              </div>
+              <span style="font-size: 0.7rem; color: var(--text-dim);">🖱️ Click & Drag to Orbit</span>
+            </div>
+
+            <div class="canvas-container" style="height: 310px;">
+              <canvas id="bloch-canvas"></canvas>
+              <div class="canvas-hint">Drag anywhere to rotate view in 3D</div>
+              <div class="canvas-watermark">Bloch Sphere • |ψ⟩ = cos(θ/2)|0⟩ + e^{iφ}sin(θ/2)|1⟩</div>
+            </div>
+
+            <!-- Dual Wave Interference Strip Canvas -->
+            <div style="margin-top: 0.25rem;">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.35rem;">
+                <span style="font-size: 0.72rem; font-weight: 700; color: var(--text-dim); text-transform: uppercase;">
+                  Dual Wave Interference Strip (Real & Imaginary Oscillations)
+                </span>
+                <span style="font-size: 0.7rem; font-family: var(--font-mono); color: var(--accent-cyan);">60 FPS Live</span>
+              </div>
+              <div class="canvas-container" style="height: 75px; background: rgba(8, 12, 22, 0.8);">
+                <canvas id="wave-canvas"></canvas>
+              </div>
+            </div>
+          </div>
+
+          <!-- Controls & Sliders Card -->
+          <div class="controls-card">
+            
+            <!-- Polar Angle Theta Slider -->
+            <div class="control-group">
+              <div class="control-header">
+                <span>Polar Angle (θ) — Superposition Balance</span>
+                <span id="val-theta" class="control-val">45.0°</span>
+              </div>
+              <input type="range" id="slider-theta" min="0" max="180" step="0.5" value="45">
+              <div style="display: flex; justify-content: space-between; font-size: 0.65rem; color: var(--text-dim); font-family: var(--font-mono);">
+                <span>0° (|0⟩ North)</span>
+                <span>90° (50/50 Equator)</span>
+                <span>180° (|1⟩ South)</span>
+              </div>
+            </div>
+
+            <!-- Azimuthal Phase Phi Slider -->
+            <div class="control-group">
+              <div class="control-header">
+                <span style="color: var(--accent-purple);">Azimuthal Phase (φ) — Equator Rotation & Wave Shift</span>
+                <span id="val-phi" class="control-val" style="color: var(--accent-purple);">60.0°</span>
+              </div>
+              <input type="range" id="slider-phi" class="purple-slider" min="0" max="360" step="1" value="60">
+              <div style="display: flex; justify-content: space-between; font-size: 0.65rem; color: var(--text-dim); font-family: var(--font-mono);">
+                <span>0° (|+⟩ Real)</span>
+                <span>90° (|+i⟩ Imaginary)</span>
+                <span>180° (|-⟩)</span>
+                <span>270° (|-i⟩)</span>
+                <span>360°</span>
+              </div>
+            </div>
+
+            <!-- Quick Quantum Gate Buttons -->
+            <div>
+              <div style="font-size: 0.72rem; font-weight: 700; color: var(--text-dim); text-transform: uppercase; margin-bottom: 0.4rem;">
+                Standard Quantum Logic Gates
+              </div>
+              <div class="button-row">
+                <button id="btn-pauli-x" class="btn-gate" title="Pauli-X: Bit flip (inverts theta)">[X] Pauli-X (Bit Flip)</button>
+                <button id="btn-hadamard" class="btn-gate" title="Hadamard: Creates equal 50/50 superposition">[H] Hadamard (50/50)</button>
+                <button id="btn-pauli-z" class="btn-gate" title="Pauli-Z: Phase flip (+180 deg)">[Z] Pauli-Z (Phase Flip)</button>
+                <button id="btn-reset-q" class="btn-gate" title="Reset state strictly to |0>">[↺] Reset |0⟩</button>
+              </div>
+            </div>
+
+            <!-- Quantum Measurement Actions -->
+            <div style="border-top: 1px solid var(--border-slate); padding-top: 0.8rem;">
+              <div style="font-size: 0.72rem; font-weight: 700; color: var(--text-dim); text-transform: uppercase; margin-bottom: 0.4rem;">
+                Quantum Measurement (Wavefunction Collapse)
+              </div>
+              <div class="button-row">
+                <button id="btn-measure-single" class="btn-gate btn-action-measure">
+                  💥 Measure 1x (Collapse Wave)
+                </button>
+                <button id="btn-run-shots" class="btn-gate btn-action-primary">
+                  📊 Run 1,000 Quantum Shots
+                </button>
+              </div>
+              <div id="mc-histogram-box" style="margin-top: 0.5rem;"></div>
+            </div>
+
+          </div>
+
+          <!-- Mini-Game: The Quantum Vault Challenge -->
+          <div class="mission-box">
+            <div class="mission-text-group">
+              <div class="mission-tag">
+                <span>🔐</span>
+                <span>Mission Challenge: Quantum Laser Lock</span>
+              </div>
+              <div class="mission-description">
+                Tune the state vector to <b>75% |0⟩ and 25% |1⟩</b> with a <b>90° phase shift</b> (Target: <code>θ = 60°, φ = 90°</code>) to align the photonic laser lock.
+              </div>
+            </div>
+            <div id="vault-lock-badge" class="mission-status-pill">
+              🔒 LOCKED
+            </div>
+          </div>
+
+        </section>
+
+
+        <!-- ================================================================
+             MODULE 2: ENTANGLEMENT & TUNNELING ("Spooky Tether Lab")
+             ================================================================ -->
+        <section id="module-view-2" style="display: none; flex-direction: column; gap: 1rem;">
+          
+          <div class="module-header-banner">
+            <div class="banner-left">
+              <span class="banner-tag">Module 02 • Multi-Qubit Physics</span>
+              <h2 class="banner-title">Entanglement, Tunneling & 2-Qubit Circuits</h2>
+              <p class="banner-desc">Why silicon transistors hit the quantum tunneling wall, and how Bell states forge unbreakable communication links.</p>
+            </div>
+            <button class="btn-banner-tour" onclick="window.NarratorStory.togglePlayPause()" title="Play or Pause Guided Interactive Tour">
+              <span>▶</span> Play Interactive Tour
+            </button>
+          </div>
+
+          <!-- Sub-Tab Navigation -->
+          <div class="subtabs-container">
+            <button id="tab-btn-circuit" class="subtab-btn active">
+              <span>⚡ Sub-Tab B: 2-Qubit Bell Entanglement & Hacker Defense</span>
+            </button>
+            <button id="tab-btn-tunneling" class="subtab-btn">
+              <span>🔬 Sub-Tab A: Silicon Transistor Tunneling Wall</span>
+            </button>
+          </div>
+
+          <!-- SUB-VIEW B: 2-Qubit Circuit & Bell State Tether -->
+          <div id="view-circuit" style="display: flex; flex-direction: column; gap: 1rem;">
+            
+            <div class="canvas-card">
+              <div class="canvas-toolbar">
+                <div class="canvas-title">
+                  <span>2-Qubit Entanglement Circuit & Plasma Tether</span>
+                  <span class="canvas-badge">Bell State Engine</span>
+                </div>
+                <span style="font-size: 0.7rem; color: var(--text-dim);">Alice & Bob Non-Local Correlation</span>
+              </div>
+
+              <div class="canvas-container" style="height: 230px;">
+                <canvas id="circuit-canvas"></canvas>
+                <div class="canvas-hint">Click gates below to alter quantum circuit topology</div>
+              </div>
+            </div>
+
+            <!-- Circuit Controls Card -->
+            <div class="controls-card">
+              <div style="font-size: 0.75rem; font-weight: 700; color: var(--text-dim); text-transform: uppercase;">
+                Circuit Gate Slots (Click to Toggle)
+              </div>
+              
+              <div class="button-row">
+                <button id="btn-toggle-h" class="btn-gate active">
+                  [H] Hadamard on Qubit A
+                </button>
+                <button id="btn-toggle-cnot" class="btn-gate active">
+                  [⊕] CNOT Gate (A ➔ B)
+                </button>
+                <button id="btn-reset-circuit" class="btn-gate">
+                  [↺] Reset Circuit
+                </button>
+              </div>
+
+              <div style="border-top: 1px solid var(--border-slate); padding-top: 0.8rem;">
+                <div style="font-size: 0.72rem; font-weight: 700; color: var(--text-dim); text-transform: uppercase; margin-bottom: 0.4rem;">
+                  Interactive Experiments
+                </div>
+                <div class="button-row">
+                  <button id="btn-measure-qubit-a" class="btn-gate btn-action-measure">
+                    💥 Measure Qubit A (Spooky Instant Collapse)
+                  </button>
+                  <button id="btn-simulate-hacker" class="btn-gate btn-action-primary">
+                    🕵️ Simulate Hacker Interception (No-Cloning Test)
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Entanglement Mission Box -->
+            <div class="mission-box">
+              <div class="mission-text-group">
+                <div class="mission-tag">
+                  <span>🛰️</span>
+                  <span>Quantum Teleportation & Cryptography</span>
+                </div>
+                <div class="mission-description">
+                  When <b>H + CNOT</b> are active, Qubit A and B are maximally entangled in Bell State <code>|Φ⁺⟩ = 1/√2(|00⟩ + |11⟩)</code>. Measuring A collapses B with 0ms delay across any distance!
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- SUB-VIEW A: Silicon Transistor Tunneling -->
+          <div id="view-tunneling" style="display: none; flex-direction: column; gap: 1rem;">
+            
+            <div class="canvas-card">
+              <div class="canvas-toolbar">
+                <div class="canvas-title">
+                  <span>Silicon Transistor Gate Dielectric Simulator</span>
+                  <span class="canvas-badge">Schrödinger Wavepacket</span>
+                </div>
+                <span style="font-size: 0.7rem; color: var(--text-dim);">T ≈ exp(-2κd)</span>
+              </div>
+
+              <div class="canvas-container" style="height: 230px;">
+                <canvas id="tunneling-canvas"></canvas>
+                <div class="canvas-hint">Watch electrons bounce vs tunnel through the barrier</div>
+              </div>
+            </div>
+
+            <!-- Tunneling Controls Card -->
+            <div class="controls-card">
+              <div class="control-group">
+                <div class="control-header">
+                  <span>Transistor Gate Barrier Width (nm)</span>
+                  <span id="val-gate-width" class="control-val">3.5 nm</span>
+                </div>
+                <input type="range" id="slider-gate-width" min="1.0" max="14.0" step="0.1" value="3.5">
+                <div style="display: flex; justify-content: space-between; font-size: 0.65rem; color: var(--text-dim); font-family: var(--font-mono);">
+                  <span style="color: var(--accent-crimson);">1.0 nm (Quantum Tunneling Limit)</span>
+                  <span>3.0 nm (Moore's Edge)</span>
+                  <span style="color: var(--accent-emerald);">14.0 nm (Classical Cleanroom)</span>
+                </div>
+              </div>
+
+              <div id="tunneling-alert-banner" style="display: none; padding: 0.65rem 0.85rem; border-radius: 6px; background: rgba(239, 68, 68, 0.15); border: 1px solid rgba(239, 68, 68, 0.4); font-size: 0.75rem; color: #FCA5A5; align-items: center; gap: 0.5rem;">
+                ⚠️ <b>Classical Silicon Limit Reached: Electrons are Tunneling!</b>
+              </div>
+            </div>
+
+            <!-- Educational Box -->
+            <div class="mission-box">
+              <div class="mission-text-group">
+                <div class="mission-tag">
+                  <span>💡</span>
+                  <span>The Fundamental Origin of Quantum Computing</span>
+                </div>
+                <div class="mission-description">
+                  Why can't we just make classical transistors smaller forever? As dielectric layers shrink below 2nm, electrons tunnel directly through the gate—causing catastrophic power leakage and overheating.
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+        </section>
+
+
+        <!-- ================================================================
+             MODULE 3: QUANTUM INTERFERENCE & GROVER ("Wave Equalizer")
+             ================================================================ -->
+        <section id="module-view-3" style="display: none; flex-direction: column; gap: 1rem;">
+          
+          <div class="module-header-banner">
+            <div class="banner-left">
+              <span class="banner-tag">Module 03 • Quantum Algorithms</span>
+              <h2 class="banner-title">Quantum Interference & Grover's Algorithm</h2>
+              <p class="banner-desc">Constructive and destructive interference in action: how Grover's search achieves a quadratic O(√N) speedup.</p>
+            </div>
+            <button class="btn-banner-tour" onclick="window.NarratorStory.togglePlayPause()" title="Play or Pause Guided Interactive Tour">
+              <span>▶</span> Play Interactive Tour
+            </button>
+          </div>
+
+          <!-- 16-State Bar Canvas Card -->
+          <div class="canvas-card">
+            <div class="canvas-toolbar">
+              <div class="canvas-title">
+                <span>16-State Wave Equalizer (|0000⟩ to |1111⟩)</span>
+                <span class="canvas-badge">Inversion About Mean Engine</span>
+              </div>
+              <span style="font-size: 0.7rem; color: var(--accent-amber);">Click any bar to change Secret Target</span>
+            </div>
+
+            <div class="canvas-container" style="height: 270px;">
+              <canvas id="grover-canvas"></canvas>
+              <div class="canvas-hint">Golden bar = Secret target; Dashed line = Average amplitude (μ)</div>
+            </div>
+          </div>
+
+          <!-- Grover Stepper Controls Card -->
+          <div class="controls-card">
+            <div style="font-size: 0.75rem; font-weight: 700; color: var(--text-dim); text-transform: uppercase;">
+              Grover Algorithm Stepper (3-Step Execution)
+            </div>
+
+            <div class="button-row">
+              <button id="btn-grover-step1" class="btn-gate">
+                1. Superposition (H⊗4)
+              </button>
+              <button id="btn-grover-step2" class="btn-gate">
+                2. Oracle (Phase Flip)
+              </button>
+              <button id="btn-grover-step3" class="btn-gate btn-action-primary">
+                3. Diffusion (Invert Mean)
+              </button>
+              <button id="btn-grover-reset" class="btn-gate">
+                ↺ Reset
+              </button>
+            </div>
+
+            <div style="font-size: 0.72rem; color: var(--text-muted); line-height: 1.4; border-top: 1px solid var(--border-slate); padding-top: 0.6rem;">
+              <b>The Quantum Wave Intuition:</b> The Quantum Oracle does <i>not</i> make the right answer bigger! It simply flips its phase upside down (negative amplitude). Then, the Diffusion Operator computes the average amplitude μ and reflects all states across μ—catapulting the target upward while wrong answers destructively cancel out!
+            </div>
+          </div>
+
+          <!-- Grover Search Comparison Box -->
+          <div class="mission-box">
+            <div class="mission-text-group">
+              <div class="mission-tag">
+                <span>⚡</span>
+                <span>Classical vs Quantum Search Efficiency</span>
+              </div>
+              <div class="mission-description">
+                Classical brute force search: up to <b>16 checks</b>.<br>
+                Quantum Grover search: exactly <b>⌊(π/4)√16⌋ = 3 iterations</b> to reach <b>96.1% probability</b>!
+              </div>
+            </div>
+          </div>
+
+        </section>
+
+
+        <!-- ================================================================
+             MODULE 4: MICROSOFT MAJORANA 1 VS 2 ("Topological Shield")
+             ================================================================ -->
+        <section id="module-view-4" style="display: none; flex-direction: column; gap: 1rem;">
+          
+          <div class="module-header-banner">
+            <div class="banner-left">
+              <span class="banner-tag">Module 04 • Hardware Breakthrough 2025/2026</span>
+              <h2 class="banner-title">Microsoft Majorana 1 vs. Majorana 2 Simulator</h2>
+              <p class="banner-desc">Simulate Microsoft's signature "H-shaped" Tetron nanowire, quasiparticle poisoning, and the Heavy Lead (Pb) upgrade.</p>
+            </div>
+            <button class="btn-banner-tour" onclick="window.NarratorStory.togglePlayPause()" title="Play or Pause Guided Interactive Tour">
+              <span>▶</span> Play Interactive Tour
+            </button>
+          </div>
+
+          <!-- Tetron Nanowire Simulation Canvas Card -->
+          <div class="canvas-card">
+            <div class="canvas-toolbar">
+              <div class="canvas-title">
+                <span>The H-Shaped Tetron Topological Nanowire</span>
+                <span class="canvas-badge">Microscopic Cleanroom Simulator</span>
+              </div>
+              <div style="display: flex; align-items: center; gap: 0.5rem;">
+                <span style="font-size: 0.7rem; color: var(--text-dim);">Survival Stopwatch:</span>
+                <span id="majorana-stopwatch" style="font-family: var(--font-mono); font-size: 0.85rem; font-weight: 700; color: var(--accent-emerald);">
+                  0.0 ms
+                </span>
+              </div>
+            </div>
+
+            <div class="canvas-container" style="height: 290px;">
+              <canvas id="majorana-canvas"></canvas>
+              <div class="canvas-hint">Red particles = Stray thermal photons / noise attempting Quasiparticle Poisoning</div>
+            </div>
+          </div>
+
+          <!-- Hardware Mode Selector & Stress Controls -->
+          <div class="controls-card">
+            
+            <div style="font-size: 0.75rem; font-weight: 700; color: var(--text-dim); text-transform: uppercase;">
+              Hardware Architecture Mode
+            </div>
+
+            <div class="button-row">
+              <button id="btn-arch-transmon" class="btn-gate">
+                Standard Transmon (No Shield)
+              </button>
+              <button id="btn-arch-majorana1" class="btn-gate">
+                Majorana 1 (Al Shell - 2025)
+              </button>
+              <button id="btn-arch-majorana2" class="btn-gate active btn-action-primary">
+                Majorana 2 (Heavy Lead Pb - 2026)
+              </button>
+            </div>
+
+            <!-- Cryogenic Temperature Stress Slider -->
+            <div class="control-group" style="margin-top: 0.5rem;">
+              <div class="control-header">
+                <span>Cryogenic Operating Temperature (mK) & Stray Noise Flux</span>
+                <span id="val-cryo-temp" class="control-val">30 mK</span>
+              </div>
+              <input type="range" id="slider-cryo-temp" min="20" max="150" step="1" value="30">
+              <div style="display: flex; justify-content: space-between; font-size: 0.65rem; color: var(--text-dim); font-family: var(--font-mono);">
+                <span style="color: var(--accent-cyan);">20 mK (Dilution Refrigerator Base)</span>
+                <span>80 mK</span>
+                <span style="color: var(--accent-crimson);">150 mK (Thermal Stress)</span>
+              </div>
+            </div>
+
+            <!-- Deep Dive Reality Check Button -->
+            <div style="border-top: 1px solid var(--border-slate); padding-top: 0.6rem; display: flex; justify-content: flex-end;">
+              <button id="btn-open-reality-check" class="btn-header" style="background: rgba(16, 185, 129, 0.15); border-color: rgba(16, 185, 129, 0.4); color: var(--accent-emerald);">
+                🔬 Deep Dive: Materials Breakthrough vs. Scientific Skepticism ➔
+              </button>
+            </div>
+
+          </div>
+
+          <!-- Roadmap Acceleration Box -->
+          <div class="mission-box" style="border-color: rgba(16, 185, 129, 0.4);">
+            <div class="mission-text-group">
+              <div class="mission-tag" style="color: var(--accent-emerald);">
+                <span>🚀</span>
+                <span>1,000x Coherence Lifetime Leap (20 Seconds)</span>
+              </div>
+              <div class="mission-description">
+                By replacing Aluminum with <b>Heavy Lead (Pb)</b> via Microsoft Discovery AI, the bulk gap leaped to <b>1,300 μeV</b>. Topological parity lifetime skyrocketed from milliseconds to ~20 seconds—pulling the fault-tolerant million-qubit target forward from <b>2033 ➔ 2029</b>!
+              </div>
+            </div>
+          </div>
+
+        </section>
+
+      </main>
+
+
+      <!-- ====================================================================
+           RIGHT PANEL (30%): Live Mathematical Telemetry & Matrix Engine
+           ==================================================================== -->
+      <aside class="right-panel">
+        
+        <div class="telemetry-header">
+          <div class="telemetry-title">
+            <span>Mathematical Telemetry</span>
+          </div>
+          <span class="telemetry-ping">0ms Lag • Active Engine</span>
+        </div>
+
+        <!-- Dirac Ket Mathematical State Card -->
+        <div class="math-card">
+          <div class="math-card-label">
+            <span>Active Dirac State Vector |ψ⟩</span>
+            <span style="color: var(--accent-cyan);">Hilbert Space</span>
+          </div>
+          <div class="math-equation-box">
+            <div id="telemetry-dirac" class="dirac-display">
+              <span class="math-highlight-cyan">0.707</span>|0⟩ + <span class="math-highlight-purple">0.707</span>|1⟩
+            </div>
+          </div>
+        </div>
+
+        <!-- Unitary Matrix & Formulas Card -->
+        <div class="math-card">
+          <div class="math-card-label">
+            <span>Matrix Engine & Unitary Operators</span>
+            <span style="color: var(--accent-purple);">U † U = I</span>
+          </div>
+          <div id="telemetry-matrix-box" class="math-equation-box">
+            <!-- Dynamically populated by active module -->
+          </div>
+        </div>
+
+        <!-- Real-Time Probability Bars -->
+        <div class="math-card">
+          <div class="math-card-label">
+            <span>Measurement Probability (Born Rule |c_i|²)</span>
+            <span style="color: var(--accent-emerald);">∑ P_i = 100%</span>
+          </div>
+          <div id="telemetry-prob-box" class="prob-container">
+            <!-- Dynamically populated -->
+          </div>
+        </div>
+
+        <!-- Physical Metrics / Telemetry Stats Grid -->
+        <div class="math-card">
+          <div class="math-card-label">
+            <span>Physical Hardware Telemetry</span>
+            <span style="color: var(--accent-amber);">Live Telemetry</span>
+          </div>
+          <div id="telemetry-stats-box" class="stats-grid">
+            <!-- Dynamically populated -->
+          </div>
+        </div>
+
+      </aside>
+
+    </div>
+  </div>
+
+
+  <!-- ========================================================================
+       MODAL: THE PHYSICS REALITY CHECK VS. BREAKTHROUGH METER (Module 4)
+       ======================================================================== -->
+  <div id="reality-check-modal" class="modal-backdrop">
+    <div class="modal-card">
+      <div class="modal-header">
+        <div class="modal-title">
+          <span>🔬</span>
+          <span>Microsoft Majorana Breakthrough: The Materials Triumph vs. The Scientific Scrutiny</span>
+        </div>
+        <button id="btn-close-modal" class="btn-close-modal">&times;</button>
+      </div>
+      
+      <div class="modal-body">
+        <p>
+          In 2025 and 2026, Microsoft's Quantum team announced consecutive historic milestones with the <b>Majorana 1</b> and <b>Majorana 2</b> topological qubit prototypes. To understand why this matters, we must examine both the genuine condensed matter materials breakthrough and why independent physicists demand rigorous validation.
+        </p>
+
+        <div class="modal-grid-2">
+          
+          <!-- Breakthrough Side -->
+          <div class="modal-subcard breakthrough">
+            <div class="modal-subcard-title" style="color: var(--accent-emerald);">
+              <span>✅</span>
+              <span>The Materials Breakthrough</span>
+            </div>
+            <ul style="padding-left: 1.1rem; display: flex; flex-direction: column; gap: 0.4rem; font-size: 0.8rem;">
+              <li><b>Heavy Element Lead (Pb) Shell:</b> Swapping Aluminum for Lead creates vastly higher spin-orbit coupling.</li>
+              <li><b>1,300 μeV Bulk Energy Gap:</b> A 4x thicker gap effectively suppresses thermal quasiparticle poisoning exponentially ($\propto e^{-\Delta/k_BT}$).</li>
+              <li><b>1,000x Parity Lifetime Gain:</b> Parity survival surged from 1–12 milliseconds to ~20 seconds (and up to 60 seconds at base cryogenic temperatures).</li>
+              <li><b>AI-Accelerated Materials Discovery:</b> Microsoft Discovery AI screened thousands of epitaxial semiconductor-superconductor interfaces to synthesize pure defect-free nanowires.</li>
+            </ul>
+          </div>
+
+          <!-- Skepticism Side -->
+          <div class="modal-subcard skepticism">
+            <div class="modal-subcard-title" style="color: var(--accent-amber);">
+              <span>🔍</span>
+              <span>The Scientific Skepticism & Next Tests</span>
+            </div>
+            <ul style="padding-left: 1.1rem; display: flex; flex-direction: column; gap: 0.4rem; font-size: 0.8rem;">
+              <li><b>Parity vs. Braiding:</b> Measuring long fermion parity lifetime is a prerequisite, but <i>not</i> yet proof of topological non-Abelian exchange statistics.</li>
+              <li><b>The Ghost of 2018:</b> Condensed matter physicists remember previous claims of Majorana detection that were later retracted due to trivial Andreev bound states mimicking zero-bias peaks.</li>
+              <li><b>The Ultimate Gold Standard:</b> The global physics community awaits unambiguous, peer-reviewed demonstration of <b>non-Abelian braiding operations</b>—physically swapping MZMs to perform a quantum gate.</li>
+              <li><b>Commercial Roadmap:</b> If braiding is confirmed, Microsoft aims for 1,000,000 physical topological qubits in a credit-card-sized chip by 2029.</li>
+            </ul>
+          </div>
+
+        </div>
+
+        <div style="background: rgba(15, 23, 42, 0.9); border: 1px solid var(--border-slate); border-radius: 8px; padding: 0.85rem; font-size: 0.78rem;">
+          <b>Summary for Quantum Engineers:</b> Majorana 2 is undeniably one of the most sophisticated semiconductor-superconductor heterostructures ever manufactured. While true fault tolerance awaits braiding verification, the jump from milliseconds to 20 seconds solves the fundamental quasiparticle poisoning bottleneck that plagued topological hardware for a decade.
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Script Includes -->
+  <script src="js/audio.js"></script>
+  <script src="js/math_engine.js"></script>
+  <script src="js/narrator.js"></script>
+  <script src="js/module1.js"></script>
+  <script src="js/module2.js"></script>
+  <script src="js/module3.js"></script>
+  <script src="js/module4.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
