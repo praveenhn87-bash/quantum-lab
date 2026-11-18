@@ -414,14 +414,6 @@ body {
   border-radius: 6px;
   white-space: nowrap;
 }
-  font-weight: 600;
-  color: var(--accent-cyan);
-  background: rgba(0, 242, 254, 0.1);
-  border: 1px solid rgba(0, 242, 254, 0.25);
-  padding: 0.35rem 0.65rem;
-  border-radius: 6px;
-  white-space: nowrap;
-}
 
 /* Module Nav Tabs */
 .module-nav-list {
