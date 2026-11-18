@@ -1,13 +1,27 @@
-# QuantumLab OS: Interactive Quantum & Majorana Explorer
+# QuantumLab OS & QuantumQuest: Dual-Edition Learning & Research Lab
 
-> **Principal Frontend Architecture & Quantum Physics Visualization Dashboard**  
-> Inspired by Veritasium's visual quantum mechanics storytelling and Microsoft Quantum's historic Majorana 1 (2025) & Majorana 2 (2026) topological qubit breakthroughs.
+> **Dual-Mode Interactive Quantum Computing Explorer**  
+> Features both the **Easy Mode (Interactive & Gamified)** (everyday metaphors, coin spins, ghost walls, telepathic dice, 16-chest treasure hunts, and badges) and the **University Scientific Research Edition** (3D Bloch Sphere, Dirac bra-kets, Bell state circuits, 16-state Grover oracle, and Microsoft Majorana 1 & 2 topological nanowires).
 
 ---
 
-## 🌟 Overview & Key Highlights
+## 🌟 Dual-Edition Switcher (Available at the Top of the Page)
 
-**QuantumLab OS** is an interactive, gamified Single-Page Application (SPA) dashboard designed to visually explain and mathematically demonstrate the core concepts of quantum mechanics, quantum computing algorithms, and topological hardware engineering.
+Visitors can toggle between two tailored learning experiences at any time with a single click:
+
+* 🎓 **Easy Mode (Easy / Gamified):**
+  - **Level 1 (The Spinning Coin):** A coin in mid-air is in Superposition (Heads & Tails at once!). Slap hand down to measure it.
+  - **Level 2 (Ghost Electron & Magic Dice):** Why laptops heat up from 1nm ghost electron tunneling; roll telepathic dice linked between Delhi and London that catch eavesdroppers.
+  - **Level 3 (16-Chest Treasure Hunt):** Grover's search algorithm that finds the golden key in 3 clicks instead of 16 tries.
+  - **Level 4 (The Unbreakable Knot):** 30-second survival challenge comparing fragile regular qubits vs braided Majorana topological knots.
+  - **Audio & Trophies:** Dr. Maya's friendly spoken science teacher voice, synthesized sound effects, step-by-step guides, and 7 unlockable badges!
+
+* 🔬 **QuantumLab OS (Scientific / University Research Edition):**
+  - **Module 1:** 3D Bloch Sphere orbit, polar angles $(\theta, \phi)$, dual sine wave interference, Monte Carlo 1,000-shot Born rule histogram, Quantum Laser Lock game.
+  - **Module 2:** Silicon transistor tunneling barrier Hamiltonian calculation, 2-qubit Bell circuit $|\Phi^+\rangle$, density matrix $\rho$, entanglement fidelity, and eavesdropper interception.
+  - **Module 3:** 16-state Grover quantum oracle with diffusion operator $D = 2|s\rangle\langle s| - I$ and phase inversion about the mean.
+  - **Module 4:** Microsoft Majorana 1 (2025) & Majorana 2 (2026) H-shaped Tetron topological nanowire canvas with 4 MZMs, parity check, quasiparticle poisoning rate $\Gamma \propto \exp(-\Delta/k_BT)$, and materials science deep dive.
+
 
 ### 🎨 Design System: "Steely Optics Lab / Cleanroom Dark Mode"
 - **Backgrounds:** Deep Obsidian (`#090D16`), Frosted Slate Cards (`rgba(21, 29, 42, 0.85)`) with `backdrop-filter: blur(12px)` and subtle `1px solid #1E293B` borders.

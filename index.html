@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>QuantumLab OS: Interactive Quantum & Majorana Explorer</title>
-  <meta name="description" content="Visual quantum mechanics dashboard demonstrating superposition, entanglement, Grover's algorithm, and Microsoft's Majorana 1 & 2 topological qubit hardware.">
+  <title>QuantumLab: Easy &amp; Scientific Quantum Explorer</title>
+  <meta name="description" content="Dual-mode interactive quantum computing explorer: Easy Mode with games, everyday analogies, and badges, plus Scientific Mode with Dirac bra-kets and topological qubit hardware.">
   
   <link rel="stylesheet" href="css/style.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -16,8 +16,622 @@
   <!-- Toast Notification Container -->
   <div id="toast-container" class="toast-container"></div>
 
-  <!-- Global Application Shell -->
-  <div class="app-shell">
+  <!-- Unified Top Mission Control Nav Bar -->
+  <header class="unified-top-nav">
+    <div class="nav-brand">
+      <div class="nav-brand-logo">⚛️</div>
+      <div>
+        <div class="nav-brand-name">QuantumLab</div>
+        <div class="nav-brand-sub" id="current-mode-label">Easy Mode • Interactive &amp; Gamified</div>
+      </div>
+    </div>
+
+    <!-- Master Mode Switch: Easy Mode vs Scientific Mode -->
+    <div class="master-mode-switch">
+      <button id="master-btn-easy" class="master-btn active" title="Switch to Easy Mode: Fun games, everyday analogies &amp; visual challenges">
+        <span class="mode-icon">🎮</span> Easy Mode
+      </button>
+      <button id="master-btn-scientific" class="master-btn" title="Switch to Scientific Mode: Dirac bra-kets, Bell state matrices &amp; topological nanowires">
+        <span class="mode-icon">🔬</span> Scientific Mode
+      </button>
+    </div>
+
+    <!-- Audio Controls -->
+    <div class="nav-audio-controls">
+      <button id="global-btn-sfx" class="nav-pill-btn active" title="Toggle Sound Effects">
+        🔊 SFX: ON
+      </button>
+      <button id="global-btn-voice" class="nav-pill-btn active" title="Toggle Voice Narration">
+        🎙️ Voice: ON
+      </button>
+      <button id="global-btn-ambient" class="nav-pill-btn" title="Toggle Cleanroom Ambient Hum">
+        🎧 Lab Hum: OFF
+      </button>
+    </div>
+  </header>
+
+  <!-- ========================================================================
+       EDITION 1: EASY MODE (INTERACTIVE & GAMIFIED)
+       ======================================================================== -->
+  <div id="container-easy-mode" class="edition-container">
+<nav class="level-nav-ribbon">
+    <button class="level-tab active" data-level="1">
+      🪙 Level 1: The Spinning Coin
+    </button>
+    <button class="level-tab" data-level="2">
+      👻 Level 2: Ghost Electron & Magic Dice
+    </button>
+    <button class="level-tab" data-level="3">
+      🗝️ Level 3: 16-Chest Treasure Hunt
+    </button>
+    <button class="level-tab" data-level="4">
+      🛡️ Level 4: The Unbreakable Knot
+    </button>
+  </nav>
+
+  <!-- ========================================================================
+       Main 3-Column Lab Arena
+       ======================================================================== -->
+  <main class="lab-container">
+
+    <!-- LEFT COLUMN: Guide & Trophy Case -->
+    <aside style="display: flex; flex-direction: column; gap: 18px;">
+      
+      <!-- Friendly Science Teacher Guide Card -->
+      <div class="lab-card guide-card">
+        <div class="guide-avatar-row">
+          <div class="guide-avatar">👩‍🏫</div>
+          <div>
+            <div class="guide-name">Dr. Maya (Lab Guide)</div>
+            <div class="guide-role">Interactive Lab Guide</div>
+          </div>
+        </div>
+        
+        <div style="font-weight: 700; font-size: 0.82rem; color: var(--purple);" id="guide-step-title">
+          Step 1/3: The Spinning Coin Analogy
+        </div>
+        
+        <div class="guide-bubble" id="guide-step-text">
+          Hey there, future physicist! Think of a regular computer bit like a light switch—it's either ON or OFF. But in the quantum world, it's like a coin spinning in mid-air!
+        </div>
+
+        <div class="guide-controls">
+          <button id="guide-play-btn" class="btn-primary" style="padding: 8px 14px; font-size: 0.85rem;">
+            ▶️ Play Voice
+          </button>
+          <button id="guide-prev-btn" class="btn-secondary" style="padding: 8px 12px; font-size: 0.85rem;">
+            ◀
+          </button>
+          <button id="guide-next-btn" class="btn-secondary" style="padding: 8px 12px; font-size: 0.85rem;">
+            ▶
+          </button>
+        </div>
+      </div>
+
+      <!-- Trophy Case / Gamification Badges -->
+      <div class="lab-card">
+        <div class="card-header">
+          <div class="card-title">🏆 Your Lab Badges</div>
+          <span class="badge-tag student">Player Stats</span>
+        </div>
+        
+        <div class="trophy-grid">
+          <div class="trophy-item" id="badge-coin">
+            <div class="trophy-icon">🪙</div>
+            <div class="trophy-title">Coin Master</div>
+            <div class="trophy-desc">Measure the spinning coin</div>
+          </div>
+
+          <div class="trophy-item" id="badge-balance">
+            <div class="trophy-icon">⚖️</div>
+            <div class="trophy-title">50/50 Balancer</div>
+            <div class="trophy-desc">Balance Heads & Tails</div>
+          </div>
+
+          <div class="trophy-item" id="badge-ghost">
+            <div class="trophy-icon">👻</div>
+            <div class="trophy-title">Ghost Whisperer</div>
+            <div class="trophy-desc">Tunnel through the wall</div>
+          </div>
+
+          <div class="trophy-item" id="badge-entangle">
+            <div class="trophy-icon">🎲</div>
+            <div class="trophy-title">Telepathic Link</div>
+            <div class="trophy-desc">Roll twin matched dice</div>
+          </div>
+
+          <div class="trophy-item" id="badge-hacker">
+            <div class="trophy-icon">🕵️</div>
+            <div class="trophy-title">Hacker Buster</div>
+            <div class="trophy-desc">Catch a quantum spy</div>
+          </div>
+
+          <div class="trophy-item" id="badge-hunter">
+            <div class="trophy-icon">🗝️</div>
+            <div class="trophy-title">Treasure Hunter</div>
+            <div class="trophy-desc">Open chest in 3 steps</div>
+          </div>
+
+          <div class="trophy-item" id="badge-majorana" style="grid-column: span 2;">
+            <div class="trophy-icon">🛡️</div>
+            <div class="trophy-title">Topological Defender</div>
+            <div class="trophy-desc">Survive 30s with the Majorana shield!</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Real-World Everyday Metaphor -->
+      <div class="lab-card">
+        <div class="card-header">
+          <div class="card-title">💡 Everyday Metaphor</div>
+        </div>
+        <div class="metaphor-box student-mode-only">
+          <strong>The Spinning Coin Rule:</strong><br>
+          A coin flat on your desk is definitely Heads or Tails. But while it is <em>spinning on the table</em>, it is both at the same time! Quantum bits (qubits) do the same thing.
+        </div>
+        <div class="science-mode-only" style="display: none; font-size: 0.8rem; color: #94a3b8; font-family: monospace;">
+          Hilbert Space & Dirac Ket:<br>
+          |ψ⟩ = cos(θ/2)|0⟩ + e^(iφ)sin(θ/2)|1⟩<br>
+          Born Rule: P(0) = |⟨0|ψ⟩|²
+        </div>
+      </div>
+
+    </aside>
+
+    <!-- CENTER COLUMN: Interactive Game Stage -->
+    <section class="stage-container">
+      
+      <!-- Interactive Header Banner -->
+      <div class="banner-card">
+        <div class="banner-info">
+          <h2 id="banner-level-title">🪙 Level 1: The Spinning Coin (Superposition)</h2>
+          <p id="banner-level-desc">
+            Learn why a quantum particle is like a spinning coin—it holds both Heads (0) and Tails (1) at the same time until you slap your hand down!
+          </p>
+        </div>
+        <button id="banner-play-tour-btn" class="play-tour-btn">
+          ▶️ Guided Walkthrough
+        </button>
+      </div>
+
+      <!-- ================= LEVEL 1 VIEW ================= -->
+      <div id="level-view-1" style="display: flex; flex-direction: column; gap: 16px;">
+        
+        <!-- 3D Coin Canvas -->
+        <div class="canvas-arena">
+          <canvas id="canvas-level1"></canvas>
+        </div>
+
+        <!-- Action Status Callout -->
+        <div id="level1-action-status" class="metaphor-box" style="border-color: var(--cyan);">
+          🌪️ The coin is spinning in mid-air! It is in <strong>SUPERPOSITION</strong> (both Heads and Tails). Click "Slap Hand Down" to measure it!
+        </div>
+
+        <!-- Controls Row -->
+        <div class="slider-control-group">
+          <div class="slider-label-row">
+            <span>🪙 Coin Tilt Angle (How biased is the spin?)</span>
+            <span id="coin-tilt-val" class="slider-val">90°</span>
+          </div>
+          <input type="range" id="coin-tilt-slider" min="0" max="180" value="90">
+          <div style="display: flex; justify-content: space-between; font-size: 0.72rem; color: var(--text-dim);">
+            <span>0° (Always Heads |0⟩)</span>
+            <span>90° (Perfect 50/50 Superposition)</span>
+            <span>180° (Always Tails |1⟩)</span>
+          </div>
+        </div>
+
+        <!-- Big Tactile Buttons -->
+        <div class="action-btn-row">
+          <button id="btn-slap-coin" class="btn-primary">
+            ✋ SLAP HAND DOWN (Measure Result)
+          </button>
+          <button id="btn-spin-coin" class="btn-secondary">
+            🌪️ Spin In Mid-Air Again
+          </button>
+          <button id="btn-rapid-flips" class="btn-secondary">
+            ⚡ Flip 100 Times Rapidly!
+          </button>
+        </div>
+
+        <!-- Step-by-Step Instructions -->
+        <div class="step-instruction-box">
+          <div class="step-instruction-header">📖 Level 1 Instructions: How to Play</div>
+          <div class="step-list">
+            <div class="step-row">
+              <span class="step-badge">STEP 1</span>
+              <span><strong>Spin & Tilt the Coin:</strong> Drag your mouse on the 3D globe or move the <em>"Coin Tilt Angle"</em> slider to 90°. At 90°, the coin is in 50% Heads and 50% Tails at the exact same time—this is <strong>Superposition</strong>!</span>
+            </div>
+            <div class="step-row">
+              <span class="step-badge">STEP 2</span>
+              <span><strong>Measure the Quantum State:</strong> Click the green <strong>"✋ SLAP HAND DOWN"</strong> button. The moment you look or touch, the wave collapses and forces the coin to pick either Heads or Tails!</span>
+            </div>
+            <div class="step-row">
+              <span class="step-badge">STEP 3</span>
+              <span><strong>Try Rapid Flips:</strong> Click <strong>"⚡ Flip 100 Times Rapidly"</strong> to see how closely the real quantum measurements match the mathematical probability bars!</span>
+            </div>
+            <div class="step-row">
+              <span class="step-badge">GOAL 🏆</span>
+              <span>Keep your Heads & Tails balanced at 50/50 after 10 flips to unlock the <strong>⚖️ 50/50 Balancer Badge</strong>!</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Telemetry & Probabilities -->
+        <div class="lab-card" style="margin-top: 8px;">
+          <div class="card-header">
+            <div class="card-title">📊 Live Flip Probabilities</div>
+          </div>
+          
+          <div style="display: flex; flex-direction: column; gap: 10px;">
+            <div>
+              <div style="display: flex; justify-content: space-between; font-size: 0.85rem; font-weight: 700; margin-bottom: 4px;">
+                <span style="color: #34d399;">🪙 Heads |0⟩</span>
+                <span id="coin-prob0-val" style="color: #34d399; font-family: monospace;">50.0%</span>
+              </div>
+              <div class="health-meter-bar">
+                <div id="bar-heads-fill" class="health-fill green" style="width: 50%;"></div>
+              </div>
+            </div>
+
+            <div>
+              <div style="display: flex; justify-content: space-between; font-size: 0.85rem; font-weight: 700; margin-bottom: 4px;">
+                <span style="color: #f59e0b;">🪙 Tails |1⟩</span>
+                <span id="coin-prob1-val" style="color: #f59e0b; font-family: monospace;">50.0%</span>
+              </div>
+              <div class="health-meter-bar">
+                <div id="bar-tails-fill" class="health-fill yellow" style="width: 50%;"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="science-mode-only" style="display: none; margin-top: 10px; padding: 10px; background: rgba(0,0,0,0.4); border-radius: 8px; font-family: monospace; font-size: 0.85rem; color: var(--cyan);">
+            State Vector: <span id="dirac-formula-display">|ψ⟩ = 0.707|0⟩ + 0.707|1⟩</span>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- ================= LEVEL 2 VIEW ================= -->
+      <div id="level-view-2" style="display: none; flex-direction: column; gap: 16px;">
+        
+        <!-- Sub-Game Switcher -->
+        <div style="display: flex; gap: 10px;">
+          <button id="tab-btn-tunnel" class="sub-tab active" style="flex: 1; justify-content: center;">
+            👻 Sub-Game A: The Ghost Electron (Tunneling)
+          </button>
+          <button id="tab-btn-dice" class="sub-tab" style="flex: 1; justify-content: center;">
+            🎲 Sub-Game B: Telepathic Magic Dice (Entanglement)
+          </button>
+        </div>
+
+        <!-- Sub-View A: Tunneling -->
+        <div id="subview-tunnel" style="display: flex; flex-direction: column; gap: 16px;">
+          <div class="canvas-arena">
+            <canvas id="canvas-tunneling"></canvas>
+          </div>
+
+          <div id="tunnel-status-msg" class="metaphor-box">
+            🛡️ SOLID BARRIER: Barrier is thick enough. Electrons bounce right off like tennis balls!
+          </div>
+
+          <div class="slider-control-group">
+            <div class="slider-label-row">
+              <span>🧱 Silicon Barrier Wall Thickness</span>
+              <span id="barrier-val-nm" class="slider-val">7.0 nm</span>
+            </div>
+            <input type="range" id="barrier-slider" min="1" max="14" step="0.5" value="7">
+            <div style="display: flex; justify-content: space-between; font-size: 0.72rem; color: var(--text-dim);">
+              <span style="color:#f43f5e;">1.0 nm (Ultra-thin: 85% Ghost Leaks!)</span>
+              <span>7.0 nm (Balanced)</span>
+              <span style="color:#34d399;">14.0 nm (Thick: 0.01% Leaks)</span>
+            </div>
+          </div>
+
+          <div class="action-btn-row">
+            <button id="btn-fire-electron" class="btn-primary">
+              ⚡ Fire Electron Wave Packet
+            </button>
+            <div style="display: flex; align-items: center; gap: 8px; font-weight: 700; font-size: 0.9rem; margin-left: auto;">
+              <span>Ghost Leakage:</span>
+              <span id="leakage-percent-val" style="color: var(--cyan); font-family: monospace; font-size: 1.1rem;">6.7%</span>
+            </div>
+          </div>
+
+          <!-- Step-by-Step Instructions for Tunneling -->
+          <div class="step-instruction-box">
+            <div class="step-instruction-header">📖 Sub-Game A Instructions: Ghost Electron Tunneling</div>
+            <div class="step-list">
+              <div class="step-row">
+                <span class="step-badge">STEP 1</span>
+                <span><strong>Adjust Wall Thickness:</strong> Drag the slider from 14.0 nm down to 1.0 nm. Watch how the barrier shrinks on screen!</span>
+              </div>
+              <div class="step-row">
+                <span class="step-badge">STEP 2</span>
+                <span><strong>Fire Electrons:</strong> Click <strong>"⚡ Fire Electron Wave Packet"</strong>. At 14nm, electrons bounce back like rubber balls. But at 1nm or 2nm, they teleport right through like glowing purple ghosts!</span>
+              </div>
+              <div class="step-row">
+                <span class="step-badge">STEP 3</span>
+                <span><strong>Check the Heat Problem:</strong> Look at the <em>"Ghost Leakage"</em> gauge. At 1nm, leakage jumps to 85%! This is the exact quantum physics reason why smartphones and gaming laptops get warm!</span>
+              </div>
+              <div class="step-row">
+                <span class="step-badge">GOAL 🏆</span>
+                <span>Successfully tunnel an electron through the thin barrier to earn the <strong>👻 Ghost Whisperer Badge</strong>!</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sub-View B: Entangled Dice -->
+        <div id="subview-dice" style="display: none; flex-direction: column; gap: 16px;">
+          <div class="canvas-arena">
+            <canvas id="canvas-entangle"></canvas>
+          </div>
+
+          <div id="dice-status-msg" class="metaphor-box">
+            ✨ Quantum Magic Link Active! Roll the dice and watch both dice land on the exact same number instantly.
+          </div>
+
+          <div class="action-btn-row">
+            <button id="btn-roll-dice" class="btn-primary">
+              🎲 Roll Magic Telepathic Dice
+            </button>
+            <button id="btn-hacker-intercept" class="btn-danger">
+              🕵️ Send Eavesdropper / Hacker Attempt
+            </button>
+            <button id="btn-reset-link" class="btn-secondary">
+              ✨ Restore Quantum Link
+            </button>
+          </div>
+
+          <!-- Step-by-Step Instructions for Entanglement & Hacker -->
+          <div class="step-instruction-box">
+            <div class="step-instruction-header">📖 Sub-Game B Instructions: Telepathic Dice & Unhackable Internet</div>
+            <div class="step-list">
+              <div class="step-row">
+                <span class="step-badge">STEP 1</span>
+                <span><strong>Roll the Magic Dice:</strong> Click <strong>"🎲 Roll Magic Telepathic Dice"</strong>. Even though Die A is in Delhi and Die B is in London, they ALWAYS stop on the exact same number together! That is <strong>Quantum Entanglement</strong>.</span>
+              </div>
+              <div class="step-row">
+                <span class="step-badge">STEP 2</span>
+                <span><strong>Trigger the Hacker Attack:</strong> Click the red <strong>"🕵️ Send Eavesdropper / Hacker Attempt"</strong> button. An evil spy tries to peek at the quantum signal!</span>
+              </div>
+              <div class="step-row">
+                <span class="step-badge">STEP 3</span>
+                <span><strong>Witness Quantum Security:</strong> The moment the spy peeks, the quantum wave collapses, the tether breaks, and the numbers scramble into random noise! The spy gets nothing. Click <strong>"✨ Restore Quantum Link"</strong> to reset.</span>
+              </div>
+              <div class="step-row">
+                <span class="step-badge">GOAL 🏆</span>
+                <span>Roll twin matched dice to unlock <strong>🎲 Telepathic Link</strong>, and intercept the spy to unlock <strong>🕵️ Hacker Buster</strong>!</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- ================= LEVEL 3 VIEW ================= -->
+      <div id="level-view-3" style="display: none; flex-direction: column; gap: 16px;">
+        
+        <div id="grover-status-msg" class="metaphor-box">
+          🗝️ Choose any chest below to hide the Golden Key! Then compare Classical Search vs Grover's Quantum Search.
+        </div>
+
+        <!-- 16 Chest Interactive Grid -->
+        <div class="chest-grid" id="chest-grid-container">
+          <!-- Dynamically populated 16 chests -->
+        </div>
+
+        <!-- Grover Equalizer Canvas -->
+        <div class="canvas-arena" style="height: 240px;">
+          <canvas id="canvas-grover"></canvas>
+        </div>
+
+        <!-- Action Steps -->
+        <div class="action-btn-row">
+          <button id="btn-classical-search" class="btn-secondary">
+            🐢 Try Classical Search (One by One)
+          </button>
+          <button id="btn-grover-step1" class="btn-secondary">
+            🔊 1. Broadcast Wave
+          </button>
+          <button id="btn-grover-step2" class="btn-secondary">
+            🔄 2. Flip Secret Echo
+          </button>
+          <button id="btn-grover-step3" class="btn-primary">
+            🚀 3. Amplify Wave!
+          </button>
+          <button id="btn-open-chest" class="btn-primary" style="background: linear-gradient(135deg, #f59e0b, #d97706);">
+            🗝️ Open Winning Chest!
+          </button>
+        </div>
+
+        <!-- Step-by-Step Instructions for Grover's Search -->
+        <div class="step-instruction-box">
+          <div class="step-instruction-header">📖 Level 3 Instructions: 16-Chest Treasure Hunt (Grover's Search)</div>
+          <div class="step-list">
+            <div class="step-row">
+              <span class="step-badge">STEP 1</span>
+              <span><strong>Hide Your Golden Key:</strong> Click any of the 16 chests above (0 to 15) to choose where the golden key is hidden!</span>
+            </div>
+            <div class="step-row">
+              <span class="step-badge">STEP 2</span>
+              <span><strong>See How Slow Classical Computers Are:</strong> Click <strong>"🐢 Try Classical Search"</strong>. Watch it check chest 0, then 1, then 2... very slowly!</span>
+            </div>
+            <div class="step-row">
+              <span class="step-badge">STEP 3</span>
+              <span><strong>Do Quantum Magic in 3 Clicks:</strong><br>
+              • Click <strong>"🔊 1. Broadcast Wave"</strong> (sends an equal sound wave to all 16 chests).<br>
+              • Click <strong>"🔄 2. Flip Secret Echo"</strong> (inverts the wave of the winning chest upside down).<br>
+              • Click <strong>"🚀 3. Amplify Wave!"</strong> (wave interference makes the winning chest's probability shoot up to 96%!).</span>
+            </div>
+            <div class="step-row">
+              <span class="step-badge">STEP 4 & GOAL 🏆</span>
+              <span>Click <strong>"🗝️ Open Winning Chest"</strong> to unlock your golden treasure and earn the <strong>🗝️ Treasure Hunter Badge</strong>!</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- ================= LEVEL 4 VIEW ================= -->
+      <div id="level-view-4" style="display: none; flex-direction: column; gap: 16px;">
+        
+        <!-- Nanowire Canvas Arena -->
+        <div class="canvas-arena">
+          <canvas id="canvas-majorana"></canvas>
+        </div>
+
+        <div id="majorana-status-msg" class="metaphor-box">
+          🥊 Regular Qubit vs Majorana Topological Braided Wire. Click "Start Survival Run" to test!
+        </div>
+
+        <!-- Dual Health Bars -->
+        <div class="lab-card">
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+            <div>
+              <div style="display: flex; justify-content: space-between; font-weight: 700; font-size: 0.85rem; margin-bottom: 4px;">
+                <span style="color:#f43f5e;">💥 Regular Qubit Health</span>
+                <span id="std-health-pct" style="color:#f43f5e; font-family: monospace;">100%</span>
+              </div>
+              <div class="health-meter-bar">
+                <div id="std-health-fill" class="health-fill green" style="width: 100%;"></div>
+              </div>
+            </div>
+
+            <div>
+              <div style="display: flex; justify-content: space-between; font-weight: 700; font-size: 0.85rem; margin-bottom: 4px;">
+                <span style="color:#34d399;">🛡️ Majorana Wire Health</span>
+                <span id="maj-health-pct" style="color:#34d399; font-family: monospace;">100%</span>
+              </div>
+              <div class="health-meter-bar">
+                <div id="maj-health-fill" class="health-fill green" style="width: 100%;"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Cryo & Noise Controls -->
+        <div class="slider-control-group">
+          <div class="slider-label-row">
+            <span>❄️ Cryogenic Fridge Temperature</span>
+            <span id="temp-val-display" class="slider-val">50 mK (-273.1°C)</span>
+          </div>
+          <input type="range" id="temp-slider" min="20" max="300" value="50">
+          <div style="display: flex; justify-content: space-between; font-size: 0.72rem; color: var(--text-dim);">
+            <span style="color: #38bdf8;">20 mK (Near Absolute Zero)</span>
+            <span>150 mK (Warm)</span>
+            <span style="color: #f43f5e;">300 mK (Hostile Thermal Noise)</span>
+          </div>
+        </div>
+
+        <!-- Action Row -->
+        <div class="action-btn-row">
+          <button id="btn-start-survival" class="btn-primary">
+            ⏱️ Start 30-Second Survival Run
+          </button>
+          <button id="btn-toggle-shield" class="btn-secondary">
+            🛡️ Activate Topological Shield
+          </button>
+          <div style="display: flex; align-items: center; gap: 8px; font-weight: 700; font-size: 0.95rem; margin-left: auto;">
+            <span>Survival Stopwatch:</span>
+            <span id="survival-timer-val" style="color: var(--cyan); font-family: monospace; font-size: 1.2rem;">0s</span>
+          </div>
+        </div>
+
+        <!-- Step-by-Step Instructions for Majorana Shield -->
+        <div class="step-instruction-box">
+          <div class="step-instruction-header">📖 Level 4 Instructions: The 30-Second Survival Challenge</div>
+          <div class="step-list">
+            <div class="step-row">
+              <span class="step-badge">STEP 1</span>
+              <span><strong>Meet the Contenders:</strong> On the left is a <em>Regular Superconducting Qubit</em> (fragile like an egg on a spoon). On the right is Microsoft's <em>Majorana Nanowire</em> (split into two braided knots at the wire ends).</span>
+            </div>
+            <div class="step-row">
+              <span class="step-badge">STEP 2</span>
+              <span><strong>Adjust Refrigerator Temperature:</strong> Move the temperature slider. Notice how stray red heat particles buzz and vibrate faster when it gets warm!</span>
+            </div>
+            <div class="step-row">
+              <span class="step-badge">STEP 3</span>
+              <span><strong>Activate Topological Shield:</strong> Click <strong>"🛡️ Activate Topological Shield"</strong> to braid the knots at both ends of the wire.</span>
+            </div>
+            <div class="step-row">
+              <span class="step-badge">STEP 4 & GOAL 🏆</span>
+              <span>Click <strong>"⏱️ Start 30-Second Survival Run"</strong>! Watch the regular qubit die in 3 to 5 seconds, while the Majorana braided wire stays green and survives! Reach 30 seconds to earn the ultimate <strong>🛡️ Topological Defender Badge</strong>!</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- RIGHT COLUMN: Real-World Facts & Home Experiments -->
+    <aside style="display: flex; flex-direction: column; gap: 18px;">
+      
+      <!-- Did You Know? Real-World Science -->
+      <div class="lab-card">
+        <div class="card-header">
+          <div class="card-title">🧠 Did You Know?</div>
+          <span class="badge-tag student">Real World</span>
+        </div>
+
+        <div class="fact-card">
+          <div class="fact-card-title">📱 Why Your Phone Warms Up</div>
+          Transistors in modern smartphones (like iPhone and Galaxy) are only 3 nanometers wide. At that tiny size, electrons literally leak through barriers via Quantum Tunneling!
+        </div>
+
+        <div class="fact-card">
+          <div class="fact-card-title">🏦 Unhackable Banking</div>
+          Banks and defense agencies use Quantum Key Distribution (QKD). If a spy tries to tap the fiber optic cable, quantum mechanics collapses the state, instantly warning the bank!
+        </div>
+
+        <div class="fact-card">
+          <div class="fact-card-title">🧬 Quantum Medicine</div>
+          A classical supercomputer would take 10,000 years to simulate a single complex penicillin protein. A quantum computer could simulate it in minutes.
+        </div>
+      </div>
+
+      <!-- Try This At Home Experiments -->
+      <div class="lab-card">
+        <div class="card-header">
+          <div class="card-title">🧪 Try This At Home!</div>
+        </div>
+
+        <div style="font-size: 0.85rem; line-height: 1.5; color: #cbd5e1; display: flex; flex-direction: column; gap: 10px;">
+          <div>
+            <strong>1. Polarizing Sunglasses Trick:</strong><br>
+            Take two pairs of polarized sunglasses. Place one over the other. Rotate one 90 degrees. Light completely vanishes! Now insert a third pair at 45 degrees between them—light magically comes back! That's quantum measurement.
+          </div>
+          <div>
+            <strong>2. The Spinning Coin Proof:</strong><br>
+            Spin a quarter on a smooth table. Ask your friend: "Is it Heads or Tails right now?" They can't answer until you slap your hand down!
+          </div>
+        </div>
+      </div>
+
+    </aside>
+
+  </main>
+
+  <!-- ========================================================================
+       Footer
+       ======================================================================== -->
+  <footer class="lab-footer">
+    <div>
+      ⚛️ <strong>QuantumQuest OS: Easy Mode</strong> — 100% Client-Side Physics Game Lab
+    </div>
+    <div>
+      <a href="https://github.com/praveenhn87-bash/quantum-lab" target="_blank" class="footer-link">GitHub Repository</a> • Cleanroom Mode
+    </div>
+  </footer>
+  </div>
+
+  <!-- ========================================================================
+       EDITION 2: SCIENTIFIC RESEARCH MODE (QUANTUMLAB OS)
+       ======================================================================== -->
+  <div id="container-scientific-mode" class="edition-container" style="display: none;">
+<div class="app-shell">
     
     <!-- Top Mission Control Header -->
     <header class="top-header">
@@ -40,20 +654,12 @@
           <span>OPTICS LAB ONLINE</span>
         </div>
 
-        <button id="btn-toggle-audio" class="btn-header" title="Toggle Synthesized Sound Effects">
-          🔊 SFX Active
+        <button id="btn-toggle-audio" class="btn-header" title="Toggle Synthesized Web Audio">
+          🔊 Audio Active
         </button>
 
-        <button id="btn-toggle-voice" class="btn-header active" title="Toggle Spoken Audio Descriptions">
-          🎙️ Voice Narration: ON
-        </button>
-
-        <button id="btn-toggle-ambient" class="btn-header" title="Toggle Ambient Optics Cleanroom Drone">
-          🎧 Lab Ambient: OFF
-        </button>
-
-        <button id="btn-toggle-veritasium" class="btn-header" title="Toggle Interactive Guided Tour">
-          🎮 Interactive Mode
+        <button id="btn-toggle-veritasium" class="btn-header" title="Toggle YouTube-style Guided Explainer">
+          🎓 Interactive Mode
         </button>
       </div>
     </header>
@@ -66,14 +672,14 @@
            ==================================================================== -->
       <aside class="left-sidebar">
         
-        <!-- Interactive Story Narrator Box (Guided Explainer) -->
+        <!-- Interactive Guide Box -->
         <div class="narrator-card">
           <div class="narrator-header">
             <div class="narrator-channel">
               <span class="narrator-live-tag">LIVE</span>
               <span id="narrator-speaker">Interactive Guide</span>
             </div>
-            <span id="narrator-story-title" style="font-size: 0.7rem; color: var(--accent-cyan); font-weight: 600;">Module 01</span>
+            <span style="font-size: 0.65rem; color: var(--text-dim);">Guided Tour</span>
           </div>
 
           <div class="narrator-caption-box">
@@ -86,23 +692,12 @@
             <div id="narrator-progress" class="narrator-progress"></div>
           </div>
 
-          <div class="narrator-actions">
-            <button id="btn-narrator-play" class="btn-narrator-play" title="Play or Pause Guided Documentary Tour">
-              <span class="play-icon">▶</span>
-              <span class="play-label">Play Guided Explainer</span>
+          <div class="narrator-controls">
+            <button id="btn-narrator-prev" class="btn-narrator-step" title="Previous Story Beat">⏮</button>
+            <button id="btn-narrator-play" class="btn-narrator-play">
+              <span>▶ Play Guided Explainer</span>
             </button>
-            
-            <div class="narrator-sub-controls">
-              <button id="btn-narrator-prev" class="btn-narrator-step" title="Previous Story Beat">
-                ⏮ Prev
-              </button>
-              <span id="narrator-step-indicator" class="narrator-step-pill">
-                Step <span id="narrator-step-num">1</span> / <span id="narrator-step-total">5</span>
-              </span>
-              <button id="btn-narrator-next" class="btn-narrator-step" title="Next Story Beat">
-                Next ⏭
-              </button>
-            </div>
+            <button id="btn-narrator-next" class="btn-narrator-step" title="Next Story Beat">⏭</button>
           </div>
         </div>
 
@@ -190,9 +785,6 @@
               <h2 class="banner-title">Superposition, Phase & The Bloch Sphere</h2>
               <p class="banner-desc">Explore continuous quantum state space on the 3D unit sphere and observe interference waves.</p>
             </div>
-            <button class="btn-banner-tour" onclick="window.NarratorStory.togglePlayPause()" title="Play or Pause Guided Interactive Tour">
-              <span>▶</span> Play Interactive Tour
-            </button>
           </div>
 
           <!-- 3D Bloch Sphere Canvas Card -->
@@ -319,9 +911,6 @@
               <h2 class="banner-title">Entanglement, Tunneling & 2-Qubit Circuits</h2>
               <p class="banner-desc">Why silicon transistors hit the quantum tunneling wall, and how Bell states forge unbreakable communication links.</p>
             </div>
-            <button class="btn-banner-tour" onclick="window.NarratorStory.togglePlayPause()" title="Play or Pause Guided Interactive Tour">
-              <span>▶</span> Play Interactive Tour
-            </button>
           </div>
 
           <!-- Sub-Tab Navigation -->
@@ -467,9 +1056,6 @@
               <h2 class="banner-title">Quantum Interference & Grover's Algorithm</h2>
               <p class="banner-desc">Constructive and destructive interference in action: how Grover's search achieves a quadratic O(√N) speedup.</p>
             </div>
-            <button class="btn-banner-tour" onclick="window.NarratorStory.togglePlayPause()" title="Play or Pause Guided Interactive Tour">
-              <span>▶</span> Play Interactive Tour
-            </button>
           </div>
 
           <!-- 16-State Bar Canvas Card -->
@@ -510,7 +1096,7 @@
             </div>
 
             <div style="font-size: 0.72rem; color: var(--text-muted); line-height: 1.4; border-top: 1px solid var(--border-slate); padding-top: 0.6rem;">
-              <b>The Quantum Wave Intuition:</b> The Quantum Oracle does <i>not</i> make the right answer bigger! It simply flips its phase upside down (negative amplitude). Then, the Diffusion Operator computes the average amplitude μ and reflects all states across μ—catapulting the target upward while wrong answers destructively cancel out!
+              <b>The Veritasium Intuition:</b> The Quantum Oracle does <i>not</i> make the right answer bigger! It simply flips its phase upside down (negative amplitude). Then, the Diffusion Operator computes the average amplitude μ and reflects all states across μ—catapulting the target upward while wrong answers destructively cancel out!
             </div>
           </div>
 
@@ -542,9 +1128,6 @@
               <h2 class="banner-title">Microsoft Majorana 1 vs. Majorana 2 Simulator</h2>
               <p class="banner-desc">Simulate Microsoft's signature "H-shaped" Tetron nanowire, quasiparticle poisoning, and the Heavy Lead (Pb) upgrade.</p>
             </div>
-            <button class="btn-banner-tour" onclick="window.NarratorStory.togglePlayPause()" title="Play or Pause Guided Interactive Tour">
-              <span>▶</span> Play Interactive Tour
-            </button>
           </div>
 
           <!-- Tetron Nanowire Simulation Canvas Card -->
@@ -750,7 +1333,12 @@
   </div>
 
 
-  <!-- Script Includes -->
+  
+  </div>
+
+  <!-- ========================================================================
+       SCRIPTS: SCIENTIFIC RESEARCH ENGINE
+       ======================================================================== -->
   <script src="js/audio.js"></script>
   <script src="js/math_engine.js"></script>
   <script src="js/narrator.js"></script>
@@ -759,5 +1347,114 @@
   <script src="js/module3.js"></script>
   <script src="js/module4.js"></script>
   <script src="js/app.js"></script>
+
+  <!-- ========================================================================
+       SCRIPTS: EASY MODE ENGINE
+       ======================================================================== -->
+  <script src="js/student/audio.js"></script>
+  <script src="js/student/narrator.js"></script>
+  <script src="js/student/module1.js"></script>
+  <script src="js/student/module2.js"></script>
+  <script src="js/student/module3.js"></script>
+  <script src="js/student/module4.js"></script>
+  <script src="js/student/app.js"></script>
+
+  <!-- ========================================================================
+       MASTER SWITCHER & GLOBAL AUDIO CONTROLLER
+       ======================================================================== -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const btnEasy = document.getElementById('master-btn-easy');
+      const btnScientific = document.getElementById('master-btn-scientific');
+      const containerEasy = document.getElementById('container-easy-mode');
+      const containerScientific = document.getElementById('container-scientific-mode');
+      const modeLabel = document.getElementById('current-mode-label');
+
+      // Global Audio Buttons
+      const btnSFX = document.getElementById('global-btn-sfx');
+      const btnVoice = document.getElementById('global-btn-voice');
+      const btnAmbient = document.getElementById('global-btn-ambient');
+
+      let sfxOn = true;
+      let voiceOn = true;
+      let ambientOn = false;
+
+      function switchMode(mode) {
+        if (mode === 'easy') {
+          btnEasy.classList.add('active');
+          btnScientific.classList.remove('active');
+          containerEasy.style.display = 'block';
+          containerScientific.style.display = 'none';
+          if (modeLabel) modeLabel.textContent = 'Easy Mode • Interactive & Gamified';
+
+          setTimeout(() => {
+            if (window.level1) window.level1.resize();
+            if (window.level2) window.level2.resize();
+            if (window.level3) window.level3.resize();
+            if (window.level4) window.level4.resize();
+          }, 60);
+
+          if (window.labAudio && sfxOn) window.labAudio.playCoinSpin();
+        } else {
+          btnScientific.classList.add('active');
+          btnEasy.classList.remove('active');
+          containerScientific.style.display = 'block';
+          containerEasy.style.display = 'none';
+          if (modeLabel) modeLabel.textContent = 'Scientific Mode • QuantumLab OS v2.6';
+
+          setTimeout(() => {
+            if (window.module1) window.module1.handleResize();
+            if (window.module2) window.module2.handleResize();
+            if (window.module3) window.module3.handleResize();
+            if (window.module4) window.module4.handleResize();
+          }, 60);
+
+          if (window.QuantumAudio && sfxOn) window.QuantumAudio.playGateClick();
+        }
+      }
+
+      if (btnEasy && btnScientific) {
+        btnEasy.addEventListener('click', () => switchMode('easy'));
+        btnScientific.addEventListener('click', () => switchMode('scientific'));
+      }
+
+      // Global Sync Audio Controls
+      if (btnSFX) {
+        btnSFX.addEventListener('click', () => {
+          sfxOn = !sfxOn;
+          btnSFX.classList.toggle('active', sfxOn);
+          btnSFX.innerHTML = sfxOn ? '🔊 SFX: ON' : '🔇 SFX: OFF';
+          if (window.labAudio) window.labAudio.isSFXEnabled = sfxOn;
+          if (window.QuantumAudio) window.QuantumAudio.sfxEnabled = sfxOn;
+        });
+      }
+
+      if (btnVoice) {
+        btnVoice.addEventListener('click', () => {
+          voiceOn = !voiceOn;
+          btnVoice.classList.toggle('active', voiceOn);
+          btnVoice.innerHTML = voiceOn ? '🎙️ Voice: ON' : '🔇 Voice: OFF';
+          if (window.labAudio) {
+            window.labAudio.isVoiceEnabled = voiceOn;
+            if (!voiceOn) window.labAudio.stopVoice();
+          }
+          if (window.QuantumAudio) {
+            window.QuantumAudio.voiceEnabled = voiceOn;
+            if (!voiceOn) window.QuantumAudio.stopVoice();
+          }
+        });
+      }
+
+      if (btnAmbient) {
+        btnAmbient.addEventListener('click', () => {
+          ambientOn = !ambientOn;
+          btnAmbient.classList.toggle('active', ambientOn);
+          btnAmbient.innerHTML = ambientOn ? '🎧 Lab Hum: ON' : '🎧 Lab Hum: OFF';
+          if (window.labAudio) window.labAudio.toggleAmbient(ambientOn);
+          if (window.QuantumAudio) window.QuantumAudio.toggleAmbient(ambientOn);
+        });
+      }
+    });
+  </script>
 </body>
 </html>
